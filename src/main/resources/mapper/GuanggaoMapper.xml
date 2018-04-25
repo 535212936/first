@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.IGuanggaoMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.Guanggao" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="comid" property="comid" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+ <sql id="Base_Column_List" >
+    id, comid, url
+  </sql>
+  
+  
+  <!-- 查询所有记录 -->
+  <select id="queryGuanggao" parameterType="com.jk.model.Guanggao"  resultMap="BaseResultMap" >
+    
+	select t1.*,t2.companyname comname from ${biaoid} t2,t_guanggao t1 where t1.comid=t2.id
+   
+  </select>
+  
+  <!-- 查询总记录数 -->
+  <select id="querycount" resultType="Long" >
+    select count(*) ${biaoid} t2,t_guanggao t1 where t1.comid=t2.id
+	   where t1.comid = t2.id 
+   </select>
+   
+   <!-- 查询公司下拉框显示 -->
+   
+   <select id="queryGuanggao11"  resultType="com.jk.model.Company">
+   	select * from ${biaoid}
+   </select>
+   
+   <!-- 新增广告 -->
+   <insert id="addguanggao" parameterType="com.jk.model.Guanggao" >
+    insert into t_guanggao (id, comid, url)
+    values (#{id,jdbcType=INTEGER}, #{comid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- 首页广告位查询 -->
+  <select id="guanggaolist" resultMap="BaseResultMap">
+  	select t1.*,t2.companyname comname from t_guanggao t1,${gg.biaoid} t2 where t1.comid = t2.id
+  </select>
+  
+  
+  
+  <!-- 公司详细信息查询 -->
+  <select id="querycompanyjob" resultType="com.jk.model.Company">
+  	select * from ${biaoid} t1 where t1.id=#{id}
+  </select>
+  
+  <!-- 查询公司发布职位 -->
+  
+  <select id="queryCompanyFabuJob" resultType="com.jk.model.Job">
+  	select * from t_jobs where companyid =#{id}
+  </select>
+  
+  
+  
+  
+  
+  
+  
+</mapper>

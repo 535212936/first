@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.IUserDao" >
+
+	<!-- 注册 -->
+   <select id="zhuchexianselectname" resultType="int">
+   		select COUNT(*) from t_user where loginname = #{loginname}
+   </select>
+	
+	<insert id="saveuserinfo">
+  		insert into t_user (username,loginname,password,questionone,answerone,questiontwo,answertwo,phone) values(#{username},#{loginname},#{password},#{questionone},#{answerone},#{questiontwo},#{answertwo},#{phone})
+  	</insert>
+  	
+   <select id="selectTxlk" resultType="java.util.Map">
+   		select * from t_que
+   </select>
+   
+   <select id="loginnamett" resultType="int">
+		select COUNT(*) from t_user where loginname = #{loginname} and password = #{password}
+	</select>
+	
+   <select id="loginnameandmima" resultType="com.jk.model.User">
+		select * from t_user where loginname = #{loginname} and password = #{password}
+	</select>
+	
+   <select id="sjiyanzheng" resultType="int">
+		select COUNT(*) from t_user where loginname = #{loginname} and phone = #{phone}
+   </select>
+	
+	<update id="xiugaizhanghao">
+		update t_user set password = #{password} where loginname = #{loginname} and phone = #{phone} and answerone = #{answerone} and answertwo = #{answertwo} 
+	</update>
+
+   <select id="selectuserWenti1" resultType="int">
+		select questionone from t_user where loginname = #{loginname}
+   </select>
+   
+   <select id="selectWenti1" resultType="String">
+		select qtext from t_que where qid = #{tt}
+   </select>
+   
+   <select id="selectuserWenti2" resultType="int">
+		select questiontwo from t_user where loginname = #{loginname}
+   </select>
+   
+   <select id="selectWenti2" resultType="String">
+		select qtext from t_que where qid = #{tt}
+   </select>
+   
+</mapper>

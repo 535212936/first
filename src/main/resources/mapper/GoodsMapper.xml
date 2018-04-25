@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.IGoodsDao" >
+
+<!-- 查询所有广告信息 -->
+<select id="goodslist" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+  <select id="goodslist1" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 1
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist2" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 2
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist3" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 3
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist4" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 4
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist5" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 5
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist6" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 6
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist7" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 7
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist8" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 8
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist9" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 9
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+   <select id="goodslist10" parameterType="com.jk.model.Goods"  resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where 1=1 and stype = 10
+	  <if test="sname!=null"> and  sname like '%${sname}%' </if>
+   
+  </select>
+  <select id="selectbyid"   resultType="com.jk.model.Goods" >
+    
+	select *  from  t_goods where sid=#{id}
+	  
+   
+  </select>
+
+<insert id="saveju" parameterType="com.jk.model.BuyRecord">
+	insert into t_buyrecord(id,userid,goodid,goodcount,status,buytime)
+	 values(#{id},#{userid},#{goodid},#{goodcount},#{status},#{buytime})
+</insert>
+
+	<!-- 查询已完成的订单 -->
+	<select id="queryGoods" resultType="com.jk.model.BuyRecord">
+		select t1.*,t2.sname goodname,t2.sprice price,t2.simage goodimage,t2.sinfo goodinfo 
+		from t_buyrecord t1,t_goods t2 
+		where t1.goodid = t2.sid
+		and t1.userid=#{id}
+		ORDER BY t1.status asc 
+	</select>
+	
+	<!-- 删除已完成的订单 -->
+	<delete id="deleteorder">
+	    delete from t_buyrecord
+	    where id = #{id}
+	</delete>
+	
+	
+	<!-- 根据ID 查询商品信息进行评论 -->
+	<select id="querygoodsById" resultType="com.jk.model.BuyRecord">
+		select t1.*,t2.sname goodname,t2.sprice price,t2.simage goodimage,t2.sinfo goodinfo 
+		from t_buyrecord t1,t_goods t2 
+		where t1.goodid = t2.sid
+		and t1.userid=#{uid}
+		and t1.goodid=#{gid}
+		
+	</select>
+	
+	
+	<!-- 评论成功后修改评论状态 -->
+	<update id="updatdestatus" >
+    update t_buyrecord
+    <set >
+      <if test="buy.status != null" >
+        status = #{buy.status},
+      </if>
+    </set>
+    where userid = #{buy.userid}
+    and goodid = #{buy.goodid}
+  </update>
+  
+  
+  <!-- 根据用户ID 查询商品名称 -->
+	<select id="querygoodname" resultType="com.jk.model.BuyRecord">
+		select t1.*,t2.sname goodname,t2.sprice price,t2.simage goodimage,t2.sinfo goodinfo 
+		from t_buyrecord t1,t_goods t2 
+		where t1.goodid = t2.sid
+		and t1.userid=#{userid}
+		
+	</select>
+	
+
+</mapper>

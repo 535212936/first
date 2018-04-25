@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.CompanyDao" >
+<select id="cunzhanghao" parameterType="com.jk.model.Company" resultType="com.jk.model.Company">
+	select * from ${biaoid} where cphone=#{cphone}
+</select>
+<insert id="tosavecompany" parameterType="com.jk.model.Company">
+	insert into ${biaoid} 
+	 <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null and id !=''"  >
+        id,
+      </if>
+      <if test="companyname != null and companyname !=''" >
+        companyname,
+      </if>
+      <if test="cphone != null and cphone!=''" >
+        cphone,
+      </if>
+      <if test="cpassword != null and cpassword !=''" >
+        cpassword,
+      </if>
+      <if test="cardzheng != null and cardzheng!=''" >
+        cardzheng,
+      </if>
+      <if test="cardfan != null and cardfan!=''" >
+        cardfan,
+      </if>
+      <if test="member != null" >
+        member,
+      </if>
+      <if test="jifen != null" >
+        jifen,
+      </if>
+      <if test="zongjifen != null" >
+        zongjifen,
+      </if>
+      <if test="biaoid != null and biaoid!=''" >
+        biaoid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+         <if test="id != null and id !=''"  >
+        #{id},
+      </if>
+      <if test="companyname != null and companyname !=''" >
+        #{companyname},
+      </if>
+      <if test="cphone != null and cphone!=''" >
+        #{cphone},
+      </if>
+      <if test="cpassword != null and cpassword !=''" >
+        #{cpassword},
+      </if>
+      <if test="cardzheng != null and cardzheng!=''" >
+        #{cardzheng},
+      </if>
+      <if test="cardfan != null and cardfan!=''" >
+        #{cardfan},
+      </if>
+      <if test="member != null" >
+        #{member},
+      </if>
+      <if test="jifen != null" >
+        #{jifen},
+      </if>
+      <if test="zongjifen != null" >
+        #{zongjifen},
+      </if>
+       <if test="biaoid != null and biaoid!=''" >
+        #{biaoid},
+      </if>
+    </trim>
+</insert>
+
+<select id="logincompany" parameterType="com.jk.model.Company" resultType="com.jk.model.Company">
+	select * from ${biaoid} where cphone=#{cphone} and cpassword=#{cpassword}
+</select>
+<select id="selectcompanyjifen"  resultType="Integer">
+	select jifen from ${biaoid} where id=#{id}
+</select>
+<select id="togetxiala"  resultType="com.jk.model.Tree">
+	select qid id,qtext text from t_que
+</select>
+<update id="buquancom"  parameterType="com.jk.model.Company">
+	update ${biaoid} <set>
+	<if test="faren!=null and faren!=''">
+	faren=#{faren},
+	</if>
+	<if test="farenid!=null and farenid!=''">
+	farenid=#{farenid},
+	</if>
+	<if test="queone!=null and queone!=''">
+	queone=#{queone},
+	</if>
+	<if test="anone!=null and anone!=''">
+	anone=#{anone},
+	</if>
+	<if test="quetwo!=null and quetwo!=''">
+	quetwo=#{quetwo},
+	</if>
+	<if test="antwo!=null and antwo!=''">
+	antwo=#{antwo}
+	</if>
+	</set>
+	where id=#{id}
+</update>
+<update id="updatejifen" >
+	update ${biaoid} <set>
+	jifen=(jifen-#{xiaofei}) where id=#{id}
+	</set>
+	
+
+</update>
+	
+	<!-- 根据公司ID查询公司信息 -->
+	
+	<select id="queryCompanyById" resultType="com.jk.model.Company">
+		select * from ${biaoid} t1 where t1.id=#{id}
+	</select>
+
+	<!-- 根据公司ID查询公司发布的职位信息 -->
+	<select id="queryJobById" resultType="com.jk.model.Job">
+		select * from t_jobs t1 where t1.companyid=#{id}
+	</select>
+	
+	
+	
+	<!-- 购买积分 -->
+	<update id="updatejifenyk" >
+	update ${biaoid} <set>
+	jifen=(jifen+#{jifen}),zongjifen=(zongjifen+#{jifen}) where id=#{id}
+	</set>
+
+    </update>
+	<!-- 修改积分 -->
+	<update id="updatejifentt" >
+			update ${biaoid} set jifen= #{ioio} where id=#{id} and biaoid = #{biaoid}
+    </update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

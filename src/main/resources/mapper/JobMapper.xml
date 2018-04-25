@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.JobMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.Job" >
+    <id column="jid" property="jid" jdbcType="INTEGER" />
+    <result column="jname" property="jname" jdbcType="VARCHAR" />
+    <result column="jyaoqiu" property="jyaoqiu" jdbcType="VARCHAR" />
+    <result column="jzhizhe" property="jzhizhe" jdbcType="VARCHAR" />
+    <result column="companyid" property="companyid" jdbcType="VARCHAR" />
+    <result column="companyname" property="companyname" jdbcType="VARCHAR" />
+    <result column="jstatus" property="jstatus" jdbcType="INTEGER" />
+    <result column="jpnum" property="jpnum" jdbcType="INTEGER" />
+    <result column="jaddress" property="jaddress" jdbcType="VARCHAR" />
+    <result column="jhot" property="jhot" jdbcType="INTEGER" />
+  </resultMap>
+ <sql id="Base_Column_List" >
+    jid, jname, jyaoqiu, jzhizhe, companyid, jstatus,jpnum ,jaddress,jsalarymin,jsalarymax,companyname
+  </sql>
+  <!--  段家豪 查询已发布职位 -->
+   <select id="selectjobandresume" resultType="java.util.Map"  >
+    select * from t_jobs where jstatus= 1; 
+  </select>
+  
+  <select id="queryJob" resultMap="BaseResultMap" parameterType="String" >
+    select * from t_jobs where companyid= #{companyid}
+  </select>
+  
+<!--   职位的状态 -->
+   <update id="updateJobUp" parameterType="Integer" >
+    update t_jobs
+    set jstatus = jstatus+1
+    where jid = #{jid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!--   职位的状态 -->
+   <update id="updateJobDown" parameterType="Integer" >
+    update t_jobs
+    set jstatus = jstatus-1
+    where jid = #{jid,jdbcType=INTEGER}
+  </update>
+<!--   新增职位发布
+ -->   
+ 
+ <insert id="addPosition" parameterType="com.jk.model.Job" >
+    insert into t_jobs (jid, jname, jyaoqiu, 
+      jzhizhe, companyid, jstatus ,jpnum,jaddress,jhot,companyname
+      )
+    values (#{jid,jdbcType=INTEGER}, #{jname,jdbcType=VARCHAR}, #{jyaoqiu,jdbcType=VARCHAR}, 
+      #{jzhizhe,jdbcType=VARCHAR}, #{companyid,jdbcType=INTEGER}, #{jstatus,jdbcType=INTEGER},
+      #{jpnum,jdbcType=INTEGER},#{jaddress,jdbcType=VARCHAR},#{jhot,jdbcType=INTEGER},#{companyname,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  <!-- 查询热门招聘 -->
+  <select id="queryHotJobs" resultType="com.jk.model.Job">
+  	select t1.*,t2.companyname comname,t2.companyinfo cominfo from t_jobs t1,${biaoid} t2 
+  	where t1.companyid = t2.id 
+  	and t1.jhot &gt; 10
+  </select>
+  
+  <!-- 根据职位ID查询职位详细信息 -->
+  <select id="queryJobInfo" parameterType="java.lang.Integer" resultType="com.jk.model.Job">
+  	select t1.*,t2.companyname comname,t2.companyinfo cominfo from t_jobs t1,${biaoid} t2 where t1.companyid = t2.id 
+  	and t1.jid = #{id}
+  </select>
+  
+
+  <!-- 根据职位名称模糊匹配相应的职位信息 -->
+  
+  <select id="queryJobByName" parameterType="com.jk.model.Job" resultType="com.jk.model.Job">
+  	select t1.*,t2.companyname comname,t2.companyinfo cominfo from t_jobs t1,t_company t2 where t1.companyid = t2.id 
+  	<if test="jname != null and jname !='' ">
+  		and t1.jname like '%${jname}%'
+  	</if>
+  </select>
+  
+  
+  
+  
+  <!--   删除职位信息 -->
+  <delete id="deletePosition"  >
+    delete from t_jobs
+    where jid in
+  <foreach collection="list" item="ids" separator="," open="(" close=")">
+         #{ids}
+     </foreach>
+  </delete>
+  
+    <!-- 公司查看收到的简历 -->
+  <select id="queryReceiveResume"  parameterType="String" resultType="java.util.Map" >
+ select * from t_resume_company t1,t_resume_a t2,t_resume_b t3 where t2.resumeid=t3.resumeid
+ 
+  and t1.resumeid=t2.resumeid and t1.companyid=#{companyid}
+  </select>
+  
+<!--  公司 删除简历,不让面试 -->
+ <delete id="deleteResumeyk"  >
+    delete from t_resume_company
+    where id in
+  <foreach collection="list" item="ids" separator="," open="(" close=")">
+         #{ids}
+     </foreach>
+  </delete>
+ <delete id="deletejianliyk"  >
+    delete from t_resume_company
+    where id =  #{id}
+       
+  </delete>
+
+  
+  
+<!--   修改职位前的查询 以及修改-->
+  
+   <select id="queryjobByid" resultType="com.jk.model.Job" parameterType="Integer" >
+    select * from t_jobs where jid= #{jid}
+  </select>
+  
+  
+  <update id="updatePosition" parameterType="com.jk.model.Job" >
+    update t_jobs
+    set jname = #{jname,jdbcType=VARCHAR},
+      jyaoqiu = #{jyaoqiu,jdbcType=VARCHAR},
+      jzhizhe = #{jzhizhe,jdbcType=VARCHAR},
+      jpnum = #{jpnum,jdbcType=INTEGER},
+      jaddress = #{jaddress,jdbcType=VARCHAR},
+      jhot = #{jhot,jdbcType=INTEGER}
+      
+    where jid = #{jid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_jobs
+    where jid = #{jid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jk.model.Job" >
+    insert into t_jobs (jid, jname, jyaoqiu, 
+      jzhizhe, companyid, jstatus
+      )
+    values (#{jid,jdbcType=INTEGER}, #{jname,jdbcType=VARCHAR}, #{jyaoqiu,jdbcType=VARCHAR}, 
+      #{jzhizhe,jdbcType=VARCHAR}, #{companyid,jdbcType=INTEGER}, #{jstatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.model.Job" >
+    insert into t_jobs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jid != null" >
+        jid,
+      </if>
+      <if test="jname != null" >
+        jname,
+      </if>
+      <if test="jyaoqiu != null" >
+        jyaoqiu,
+      </if>
+      <if test="jzhizhe != null" >
+        jzhizhe,
+      </if>
+      <if test="companyid != null" >
+        companyid,
+      </if>
+      <if test="jstatus != null" >
+        jstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jid != null" >
+        #{jid,jdbcType=INTEGER},
+      </if>
+      <if test="jname != null" >
+        #{jname,jdbcType=VARCHAR},
+      </if>
+      <if test="jyaoqiu != null" >
+        #{jyaoqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="jzhizhe != null" >
+        #{jzhizhe,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="jstatus != null" >
+        #{jstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.model.Job" >
+    update t_jobs
+    <set >
+      <if test="jname != null" >
+        jname = #{jname,jdbcType=VARCHAR},
+      </if>
+      <if test="jyaoqiu != null" >
+        jyaoqiu = #{jyaoqiu,jdbcType=VARCHAR},
+      </if>
+      <if test="jzhizhe != null" >
+        jzhizhe = #{jzhizhe,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        companyid = #{companyid,jdbcType=INTEGER},
+      </if>
+      <if test="jstatus != null" >
+        jstatus = #{jstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where jid = #{jid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.model.Job" >
+    update t_jobs
+    set jname = #{jname,jdbcType=VARCHAR},
+      jyaoqiu = #{jyaoqiu,jdbcType=VARCHAR},
+      jzhizhe = #{jzhizhe,jdbcType=VARCHAR},
+      companyid = #{companyid,jdbcType=INTEGER},
+      jstatus = #{jstatus,jdbcType=INTEGER}
+    where jid = #{jid,jdbcType=INTEGER}
+  </update> -->
+  
+  
+  
+  
+  
+</mapper>

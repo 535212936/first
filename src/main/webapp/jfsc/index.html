@@ -1,0 +1,143 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Content-Language"content="zh-cn"/>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<meta http-equiv="expires" content="" />
+<title>网才积分商城</title>
+
+<link rel="stylesheet" type="text/css" href="images/normalize.css" />
+<link rel="stylesheet" type="text/css" href="images/layout.css" />
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript" src="js/quwan-plugin.js"></script>
+<style>
+.col1 {width: 233px; height: 233px}
+.col1 img {width: 233px; height: 233px}
+.col2 {width: 478px; height: 478px}
+.col2 img{width: 478px; height: 478px; margin-left: 0px;}
+.col3 {width: 478px; height: 233px}
+.col3 img {width: 478px; height: 233px}
+.col4 {width: 233px; height: 478px}
+.col4 img {width: 233px; height: 478px}
+</style>
+</head>
+<body>
+
+
+<style>.nav a.home {background: url("images/header_logo_1.png") no-repeat center;}</style>
+<div id="header">
+  <ul class="nav">
+    <li id="home"><a class="home" href="index.html"></a></li>
+  </ul>
+  
+  <dl class="funcs">
+    <dt>
+      <form id="searchForm" name="searchForm" method="get" action="psearch.html" onsubmit="return checkSearchFormAction();">
+        <input class="text" name="keywords" id="so_txt" type="text" value="" title="请输入商品名称或条码进行搜索" autocomplete="off" />
+        <input class="submit" type="submit" value="" />
+      </form>
+    </dt>
+    
+    <dd class="funcs_dd">
+      <a class="basket navitem" href="user_cart.html" title="购物车"></a>
+      <div class="cart_detail dropdown">点击查看购物车</div>
+    </dd>
+  </dl>
+</div>
+<ul id="tags">
+   
+  <li><a href="plist.html?c=340" id="catogry_340">零食饮料(不可退换)</a>
+  
+  </li>
+  
+ 
+</ul>
+<script type="text/javascript">
+var tempso="请输入商品名称或条码进行搜索";
+$(function(){
+    //搜索框的交互
+    $("#so_txt").val(tempso).focus(function(){if($(this).val() == tempso){$(this).val("");}}).blur(function(){if ($(this).val() == ""){$(this).val(tempso)}});
+/*     //搜索提示
+    $("#so_txt1").autocomplete('/psearch_tips.html', {
+        minChars: 1,
+        matchContains: true,
+        autoFill: false,
+        max: 10,
+        matchCase: false,
+        scroll: false,
+        width: 278,
+        resultUrl: 'psearch.html?keywords=',
+        formatItem: function(row, i, max) {
+            return row[1];
+        },
+        formatResult: function(row) {
+            return row[1];
+        }
+    }); */
+ 
+</script>
+
+<div class="main">
+  <div class="heading" id="headingW" style="position:relative;">
+    <h1>欢迎来到网才积分购物系统</h1>
+    <p>我们一直倡导优质生活理念，并秉承“尊重消费者”的品牌精神，深入世界各地，严格把关所有商品的产地、工艺、原材料，致力于为消费者提供真正"优质、创意"的产品！</p>
+  </div>
+  
+  <div class="waterfall bricks new" id="big_div">
+    
+  </div>
+  <div class="loading" next_url="router.html?m=pros&a=news_list" data="30"></div>
+  <input type="hidden" value="94" id="config_id" />
+</div>
+
+<script type="text/javascript" src="js/waterfall.js"></script>
+<script type="text/javascript">
+$(function(){
+	//砖块排列配置
+	$('.bricks').masonry({itemSelector:'.brick',columnWidth:245,isAnimated:true,isFitWidth:true});
+	//var $container = $('#masonry');$container.imagesLoaded(function(){$container.masonry({itemSelector:'.brick',columnWidth:245,isFitWidth:true,isAnimated: true});});
+})
+</script>
+
+<div class="goTop_box">
+  <div class="kfBut">
+    <div class="kfqq_box none">
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=726090666&site=qq&menu=yes" target="_blank" class="keone">客服1</a>
+    <a href="http://wpa.qq.com/msgrd?v=3&uin=726090666&site=qq&menu=yes" target="_blank" class="ketow">客服2</a>
+    </div>
+  </div>
+  <div id="toTop"></div>
+</div>
+<script type="text/javascript">
+$(function(){
+    //客服
+    $('.kfBut').click(function(){if($('.kfqq_box').hasClass('none')){$('.kfqq_box').removeClass('none');}else{$('.kfqq_box').addClass('none');}});
+    //回到顶部
+    $(window).scroll(function(){if($(this).scrollTop() > 0){$("#toTop").fadeIn();}else{$("#toTop").fadeOut();}});
+    $("#toTop").click(function(){$("html,body").animate({scrollTop: "0"}, 500);return false;});
+})
+</script>
+
+
+<div id="footer">
+  <div class="wraps">
+    <ul>
+      <li><a href="#">关于我们</a></li>
+      <li><a href="#">联系我们</a></li>
+      <li><a href="#">新手指南</a></li>
+      <li><a href="#">配送方式</a></li>
+      <li><a href="#">如何付款</a></li>
+      <li><a href="#">售后服务</a></li>
+      <li><a class="join" href="http://www.MinCheng.cn/" target="_blank">连锁加盟</a></li>
+    </ul>
+    <p>&copy;龙盾科技 - 版权所有 京ICP备171001号 | <a  target="_blank">经营性ICP许可证：京A8-6666</a></p>
+  </div>
+</div>
+
+</body>
+</html>

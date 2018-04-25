@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ResumebMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.Resumeb" >
+    <id column="resumebid" property="resumebid" jdbcType="INTEGER" />
+    <result column="resumeid" property="resumeid" jdbcType="INTEGER" />
+    <result column="zhuanye" property="zhuanye" jdbcType="VARCHAR" />
+    <result column="biyexuexiao" property="biyexuexiao" jdbcType="VARCHAR" />
+    <result column="xueli" property="xueli" jdbcType="VARCHAR" />
+    <result column="mubiaozhiwei" property="mubiaozhiwei" jdbcType="VARCHAR" />
+    <result column="gongzuoxingzhi" property="gongzuoxingzhi" jdbcType="VARCHAR" />
+    <result column="youxiang" property="youxiang" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resumebid, resumeid, zhuanye, biyexuexiao, xueli, mubiaozhiwei, gongzuoxingzhi, youxiang
+  </sql>
+  <insert id="addresume" parameterType="com.jk.model.Resumeb" >
+    insert into t_resume_b (resumebid, resumeid, zhuanye, 
+      biyexuexiao, xueli, mubiaozhiwei, 
+      gongzuoxingzhi, youxiang)
+    values (#{resumebid,jdbcType=INTEGER}, #{resumeid,jdbcType=INTEGER}, #{zhuanye,jdbcType=VARCHAR}, 
+      #{biyexuexiao,jdbcType=VARCHAR}, #{xueli,jdbcType=VARCHAR}, #{mubiaozhiwei,jdbcType=VARCHAR}, 
+      #{gongzuoxingzhi,jdbcType=VARCHAR}, #{youxiang,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateresume" parameterType="com.jk.model.Resumeb" >
+    update t_resume_b
+    set resumeid = #{resumeid,jdbcType=INTEGER},
+      zhuanye = #{zhuanye,jdbcType=VARCHAR},
+      biyexuexiao = #{biyexuexiao,jdbcType=VARCHAR},
+      xueli = #{xueli,jdbcType=VARCHAR},
+      mubiaozhiwei = #{mubiaozhiwei,jdbcType=VARCHAR},
+      gongzuoxingzhi = #{gongzuoxingzhi,jdbcType=VARCHAR},
+      youxiang = #{youxiang,jdbcType=VARCHAR}
+    where resumebid = #{resumebid,jdbcType=INTEGER}
+  </update>
+  
+ 
+  
+  <!--  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resume_b
+    where resumebid = #{resumebid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resume_b
+    where resumebid = #{resumebid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jk.model.Resumeb" >
+    insert into t_resume_b (resumebid, resumeid, zhuanye, 
+      biyexuexiao, xueli, mubiaozhiwei, 
+      gongzuoxingzhi, youxiang)
+    values (#{resumebid,jdbcType=INTEGER}, #{resumeid,jdbcType=INTEGER}, #{zhuanye,jdbcType=VARCHAR}, 
+      #{biyexuexiao,jdbcType=VARCHAR}, #{xueli,jdbcType=VARCHAR}, #{mubiaozhiwei,jdbcType=VARCHAR}, 
+      #{gongzuoxingzhi,jdbcType=VARCHAR}, #{youxiang,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.model.Resumeb" >
+    insert into t_resume_b
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resumebid != null" >
+        resumebid,
+      </if>
+      <if test="resumeid != null" >
+        resumeid,
+      </if>
+      <if test="zhuanye != null" >
+        zhuanye,
+      </if>
+      <if test="biyexuexiao != null" >
+        biyexuexiao,
+      </if>
+      <if test="xueli != null" >
+        xueli,
+      </if>
+      <if test="mubiaozhiwei != null" >
+        mubiaozhiwei,
+      </if>
+      <if test="gongzuoxingzhi != null" >
+        gongzuoxingzhi,
+      </if>
+      <if test="youxiang != null" >
+        youxiang,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resumebid != null" >
+        #{resumebid,jdbcType=INTEGER},
+      </if>
+      <if test="resumeid != null" >
+        #{resumeid,jdbcType=INTEGER},
+      </if>
+      <if test="zhuanye != null" >
+        #{zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="biyexuexiao != null" >
+        #{biyexuexiao,jdbcType=VARCHAR},
+      </if>
+      <if test="xueli != null" >
+        #{xueli,jdbcType=VARCHAR},
+      </if>
+      <if test="mubiaozhiwei != null" >
+        #{mubiaozhiwei,jdbcType=VARCHAR},
+      </if>
+      <if test="gongzuoxingzhi != null" >
+        #{gongzuoxingzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="youxiang != null" >
+        #{youxiang,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.model.Resumeb" >
+    update t_resume_b
+    <set >
+      <if test="resumeid != null" >
+        resumeid = #{resumeid,jdbcType=INTEGER},
+      </if>
+      <if test="zhuanye != null" >
+        zhuanye = #{zhuanye,jdbcType=VARCHAR},
+      </if>
+      <if test="biyexuexiao != null" >
+        biyexuexiao = #{biyexuexiao,jdbcType=VARCHAR},
+      </if>
+      <if test="xueli != null" >
+        xueli = #{xueli,jdbcType=VARCHAR},
+      </if>
+      <if test="mubiaozhiwei != null" >
+        mubiaozhiwei = #{mubiaozhiwei,jdbcType=VARCHAR},
+      </if>
+      <if test="gongzuoxingzhi != null" >
+        gongzuoxingzhi = #{gongzuoxingzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="youxiang != null" >
+        youxiang = #{youxiang,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resumebid = #{resumebid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.model.Resumeb" >
+    update t_resume_b
+    set resumeid = #{resumeid,jdbcType=INTEGER},
+      zhuanye = #{zhuanye,jdbcType=VARCHAR},
+      biyexuexiao = #{biyexuexiao,jdbcType=VARCHAR},
+      xueli = #{xueli,jdbcType=VARCHAR},
+      mubiaozhiwei = #{mubiaozhiwei,jdbcType=VARCHAR},
+      gongzuoxingzhi = #{gongzuoxingzhi,jdbcType=VARCHAR},
+      youxiang = #{youxiang,jdbcType=VARCHAR}
+    where resumebid = #{resumebid,jdbcType=INTEGER}
+  </update>-->
+</mapper>

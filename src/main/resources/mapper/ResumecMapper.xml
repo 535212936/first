@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ResumecMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.Resumec" >
+    <id column="resumecid" property="resumecid" jdbcType="INTEGER" />
+    <result column="resumeid" property="resumeid" jdbcType="INTEGER" />
+    <result column="qizhinianyue" property="qizhinianyue" jdbcType="VARCHAR" />
+    <result column="zaihedanwei" property="zaihedanwei" jdbcType="VARCHAR" />
+    <result column="renhezhiwu" property="renhezhiwu" jdbcType="VARCHAR" />
+    <result column="qizhinianyuea" property="qizhinianyuea" jdbcType="VARCHAR" />
+    <result column="zaihedanweia" property="zaihedanweia" jdbcType="VARCHAR" />
+    <result column="renhezhiwua" property="renhezhiwua" jdbcType="VARCHAR" />
+    <result column="qizhinianyueb" property="qizhinianyueb" jdbcType="VARCHAR" />
+    <result column="zaihedanweib" property="zaihedanweib" jdbcType="VARCHAR" />
+    <result column="renhezhiwub" property="renhezhiwub" jdbcType="VARCHAR" />
+    <result column="qizhinianyuec" property="qizhinianyuec" jdbcType="VARCHAR" />
+    <result column="renhezhiwuc" property="renhezhiwuc" jdbcType="VARCHAR" />
+    <result column="zaihedanweic" property="zaihedanweic" jdbcType="VARCHAR" />
+    <result column="qizhinianyued" property="qizhinianyued" jdbcType="VARCHAR" />
+    <result column="zaihedanweid" property="zaihedanweid" jdbcType="VARCHAR" />
+    <result column="renhezhiwud" property="renhezhiwud" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resumecid, resumeid, qizhinianyue, zaihedanwei, renhezhiwu, qizhinianyuea, zaihedanweia, 
+    renhezhiwua, qizhinianyueb, zaihedanweib, renhezhiwub, qizhinianyuec, renhezhiwuc, 
+    zaihedanweic, qizhinianyued, zaihedanweid, renhezhiwud
+  </sql>
+  <insert id="addresume" parameterType="com.jk.model.Resumec" >
+    insert into t_resume_c (resumecid, resumeid, qizhinianyue, 
+      zaihedanwei, renhezhiwu, qizhinianyuea, 
+      zaihedanweia, renhezhiwua, qizhinianyueb, 
+      zaihedanweib, renhezhiwub, qizhinianyuec, 
+      renhezhiwuc, zaihedanweic, qizhinianyued, 
+      zaihedanweid, renhezhiwud)
+    values (#{resumecid,jdbcType=INTEGER}, #{resumeid,jdbcType=INTEGER}, #{qizhinianyue,jdbcType=VARCHAR}, 
+      #{zaihedanwei,jdbcType=VARCHAR}, #{renhezhiwu,jdbcType=VARCHAR}, #{qizhinianyuea,jdbcType=VARCHAR}, 
+      #{zaihedanweia,jdbcType=VARCHAR}, #{renhezhiwua,jdbcType=VARCHAR}, #{qizhinianyueb,jdbcType=VARCHAR}, 
+      #{zaihedanweib,jdbcType=VARCHAR}, #{renhezhiwub,jdbcType=VARCHAR}, #{qizhinianyuec,jdbcType=VARCHAR}, 
+      #{renhezhiwuc,jdbcType=VARCHAR}, #{zaihedanweic,jdbcType=VARCHAR}, #{qizhinianyued,jdbcType=VARCHAR}, 
+      #{zaihedanweid,jdbcType=VARCHAR}, #{renhezhiwud,jdbcType=VARCHAR})
+  </insert>
+   <update id="updateresume" parameterType="com.jk.model.Resumec" >
+    update t_resume_c
+    set resumeid = #{resumeid,jdbcType=INTEGER},
+      qizhinianyue = #{qizhinianyue,jdbcType=VARCHAR},
+      zaihedanwei = #{zaihedanwei,jdbcType=VARCHAR},
+      renhezhiwu = #{renhezhiwu,jdbcType=VARCHAR},
+      qizhinianyuea = #{qizhinianyuea,jdbcType=VARCHAR},
+      zaihedanweia = #{zaihedanweia,jdbcType=VARCHAR},
+      renhezhiwua = #{renhezhiwua,jdbcType=VARCHAR},
+      qizhinianyueb = #{qizhinianyueb,jdbcType=VARCHAR},
+      zaihedanweib = #{zaihedanweib,jdbcType=VARCHAR},
+      renhezhiwub = #{renhezhiwub,jdbcType=VARCHAR},
+      qizhinianyuec = #{qizhinianyuec,jdbcType=VARCHAR},
+      renhezhiwuc = #{renhezhiwuc,jdbcType=VARCHAR},
+      zaihedanweic = #{zaihedanweic,jdbcType=VARCHAR},
+      qizhinianyued = #{qizhinianyued,jdbcType=VARCHAR},
+      zaihedanweid = #{zaihedanweid,jdbcType=VARCHAR},
+      renhezhiwud = #{renhezhiwud,jdbcType=VARCHAR}
+    where resumecid = #{resumecid,jdbcType=INTEGER}
+  </update>
+  <!-- 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resume_c
+    where resumecid = #{resumecid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resume_c
+    where resumecid = #{resumecid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jk.model.Resumec" >
+    insert into t_resume_c (resumecid, resumeid, qizhinianyue, 
+      zaihedanwei, renhezhiwu, qizhinianyuea, 
+      zaihedanweia, renhezhiwua, qizhinianyueb, 
+      zaihedanweib, renhezhiwub, qizhinianyuec, 
+      renhezhiwuc, zaihedanweic, qizhinianyued, 
+      zaihedanweid, renhezhiwud)
+    values (#{resumecid,jdbcType=INTEGER}, #{resumeid,jdbcType=INTEGER}, #{qizhinianyue,jdbcType=VARCHAR}, 
+      #{zaihedanwei,jdbcType=VARCHAR}, #{renhezhiwu,jdbcType=VARCHAR}, #{qizhinianyuea,jdbcType=VARCHAR}, 
+      #{zaihedanweia,jdbcType=VARCHAR}, #{renhezhiwua,jdbcType=VARCHAR}, #{qizhinianyueb,jdbcType=VARCHAR}, 
+      #{zaihedanweib,jdbcType=VARCHAR}, #{renhezhiwub,jdbcType=VARCHAR}, #{qizhinianyuec,jdbcType=VARCHAR}, 
+      #{renhezhiwuc,jdbcType=VARCHAR}, #{zaihedanweic,jdbcType=VARCHAR}, #{qizhinianyued,jdbcType=VARCHAR}, 
+      #{zaihedanweid,jdbcType=VARCHAR}, #{renhezhiwud,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.model.Resumec" >
+    insert into t_resume_c
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resumecid != null" >
+        resumecid,
+      </if>
+      <if test="resumeid != null" >
+        resumeid,
+      </if>
+      <if test="qizhinianyue != null" >
+        qizhinianyue,
+      </if>
+      <if test="zaihedanwei != null" >
+        zaihedanwei,
+      </if>
+      <if test="renhezhiwu != null" >
+        renhezhiwu,
+      </if>
+      <if test="qizhinianyuea != null" >
+        qizhinianyuea,
+      </if>
+      <if test="zaihedanweia != null" >
+        zaihedanweia,
+      </if>
+      <if test="renhezhiwua != null" >
+        renhezhiwua,
+      </if>
+      <if test="qizhinianyueb != null" >
+        qizhinianyueb,
+      </if>
+      <if test="zaihedanweib != null" >
+        zaihedanweib,
+      </if>
+      <if test="renhezhiwub != null" >
+        renhezhiwub,
+      </if>
+      <if test="qizhinianyuec != null" >
+        qizhinianyuec,
+      </if>
+      <if test="renhezhiwuc != null" >
+        renhezhiwuc,
+      </if>
+      <if test="zaihedanweic != null" >
+        zaihedanweic,
+      </if>
+      <if test="qizhinianyued != null" >
+        qizhinianyued,
+      </if>
+      <if test="zaihedanweid != null" >
+        zaihedanweid,
+      </if>
+      <if test="renhezhiwud != null" >
+        renhezhiwud,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resumecid != null" >
+        #{resumecid,jdbcType=INTEGER},
+      </if>
+      <if test="resumeid != null" >
+        #{resumeid,jdbcType=INTEGER},
+      </if>
+      <if test="qizhinianyue != null" >
+        #{qizhinianyue,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanwei != null" >
+        #{zaihedanwei,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwu != null" >
+        #{renhezhiwu,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyuea != null" >
+        #{qizhinianyuea,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweia != null" >
+        #{zaihedanweia,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwua != null" >
+        #{renhezhiwua,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyueb != null" >
+        #{qizhinianyueb,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweib != null" >
+        #{zaihedanweib,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwub != null" >
+        #{renhezhiwub,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyuec != null" >
+        #{qizhinianyuec,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwuc != null" >
+        #{renhezhiwuc,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweic != null" >
+        #{zaihedanweic,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyued != null" >
+        #{qizhinianyued,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweid != null" >
+        #{zaihedanweid,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwud != null" >
+        #{renhezhiwud,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.model.Resumec" >
+    update t_resume_c
+    <set >
+      <if test="resumeid != null" >
+        resumeid = #{resumeid,jdbcType=INTEGER},
+      </if>
+      <if test="qizhinianyue != null" >
+        qizhinianyue = #{qizhinianyue,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanwei != null" >
+        zaihedanwei = #{zaihedanwei,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwu != null" >
+        renhezhiwu = #{renhezhiwu,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyuea != null" >
+        qizhinianyuea = #{qizhinianyuea,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweia != null" >
+        zaihedanweia = #{zaihedanweia,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwua != null" >
+        renhezhiwua = #{renhezhiwua,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyueb != null" >
+        qizhinianyueb = #{qizhinianyueb,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweib != null" >
+        zaihedanweib = #{zaihedanweib,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwub != null" >
+        renhezhiwub = #{renhezhiwub,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyuec != null" >
+        qizhinianyuec = #{qizhinianyuec,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwuc != null" >
+        renhezhiwuc = #{renhezhiwuc,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweic != null" >
+        zaihedanweic = #{zaihedanweic,jdbcType=VARCHAR},
+      </if>
+      <if test="qizhinianyued != null" >
+        qizhinianyued = #{qizhinianyued,jdbcType=VARCHAR},
+      </if>
+      <if test="zaihedanweid != null" >
+        zaihedanweid = #{zaihedanweid,jdbcType=VARCHAR},
+      </if>
+      <if test="renhezhiwud != null" >
+        renhezhiwud = #{renhezhiwud,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resumecid = #{resumecid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.model.Resumec" >
+    update t_resume_c
+    set resumeid = #{resumeid,jdbcType=INTEGER},
+      qizhinianyue = #{qizhinianyue,jdbcType=VARCHAR},
+      zaihedanwei = #{zaihedanwei,jdbcType=VARCHAR},
+      renhezhiwu = #{renhezhiwu,jdbcType=VARCHAR},
+      qizhinianyuea = #{qizhinianyuea,jdbcType=VARCHAR},
+      zaihedanweia = #{zaihedanweia,jdbcType=VARCHAR},
+      renhezhiwua = #{renhezhiwua,jdbcType=VARCHAR},
+      qizhinianyueb = #{qizhinianyueb,jdbcType=VARCHAR},
+      zaihedanweib = #{zaihedanweib,jdbcType=VARCHAR},
+      renhezhiwub = #{renhezhiwub,jdbcType=VARCHAR},
+      qizhinianyuec = #{qizhinianyuec,jdbcType=VARCHAR},
+      renhezhiwuc = #{renhezhiwuc,jdbcType=VARCHAR},
+      zaihedanweic = #{zaihedanweic,jdbcType=VARCHAR},
+      qizhinianyued = #{qizhinianyued,jdbcType=VARCHAR},
+      zaihedanweid = #{zaihedanweid,jdbcType=VARCHAR},
+      renhezhiwud = #{renhezhiwud,jdbcType=VARCHAR}
+    where resumecid = #{resumecid,jdbcType=INTEGER}
+  </update> -->
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.TreeMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.Tree" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, text, pid, url
+  </sql>
+  
+    <select id="recursionTree" resultMap="BaseResultMap"  parameterType="String">
+       select * from t_tree where pid = #{pid}
+    </select>
+  
+   <!-- <insert id="addTree" parameterType="com.jk.model.Tree">
+     insert into t_tree (id,text, pid, url) values(#{id},#{text},#{pid},#{url})
+   
+   </insert>
+   
+     <delete id="deleteTree" parameterType="String" >
+        delete from t_tree where id = #{id}
+
+     </delete>
+   
+  <select id="selectTreeById" parameterType="String" resultType="com.jk.model.Tree">
+     select * from t_tree where id = #{id}
+  
+  </select>
+    <update id="updateTree" parameterType="com.jk.model.Tree">
+   update t_tree
+    <set >
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id}
+  
+  </update>
+   
+   <select id="queryRoleTree" resultMap="BaseResultMap"  parameterType="String">
+       select * from role_tree rt,t_tree tt where rt.treeid = tt.id and rt.roleid=#{roleId}
+    </select>
+   
+   
+   
+    <delete id="deleteTreeRoleRealtion" parameterType="String">
+   
+     delete from role_tree where roleid=#{roleId}
+   </delete>
+   
+   <insert id="addTreeRoleRelation" parameterType="java.util.List">
+   
+     insert into role_tree (roleid,treeid) values
+     <foreach collection="list" item="item" index="index" separator=",">
+        (#{item.roleId},#{item.treeId})
+     </foreach>
+   
+   </insert>
+   
+   <select id="getRoleTreeList" resultType="java.util.LinkedHashMap"  parameterType="com.jk.model.User">
+       select tt.* from user_role ur,role_tree rt ,t_tree tt where ur.role_id=rt.roleId and rt.treeid =tt.id
+       and ur.userId = #{id}
+    </select>
+   
+   
+   
+    -->
+   
+   
+   
+   
+   
+   
+   
+  
+</mapper>

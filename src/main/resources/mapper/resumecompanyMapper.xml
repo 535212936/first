@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.resumecompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.model.resumecompany" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="companyid" property="companyid" jdbcType="VARCHAR" />
+    <result column="resumeid" property="resumeid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, companyid, resumeid
+  </sql>
+  <insert id="addrecom" parameterType="com.jk.model.resumecompany" >
+    insert into t_resume_company (id, companyid, resumeid,zhuangtai
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyid,jdbcType=VARCHAR}, #{resumeid,jdbcType=INTEGER},#{zhuangtai,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  
+     <update id="updatezhuangtai" parameterType="Integer" >
+    update t_resume_company
+    set zhuangtai = zhuangtai+1 where resumeid= #{resumeid}
+   
+  </update>
+  
+  
+  
+  
+  
+  
+  
+  <!--  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resume_company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_resume_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jk.model.resumecompany" >
+    insert into t_resume_company (id, companyid, resumeid
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyid,jdbcType=VARCHAR}, #{resumeid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.model.resumecompany" >
+    insert into t_resume_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="companyid != null" >
+        companyid,
+      </if>
+      <if test="resumeid != null" >
+        resumeid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeid != null" >
+        #{resumeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.model.resumecompany" >
+    update t_resume_company
+    <set >
+      <if test="companyid != null" >
+        companyid = #{companyid,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeid != null" >
+        resumeid = #{resumeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.model.resumecompany" >
+    update t_resume_company
+    set companyid = #{companyid,jdbcType=VARCHAR},
+      resumeid = #{resumeid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>-->
+</mapper>

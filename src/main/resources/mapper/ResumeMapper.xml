@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.ResumeMapper" >
+
+  <sql id="Base_Column_List" >
+    resumeid, resumename, userid, username, userphone, sex, birthday, photo, jiguan, 
+    minzu, zhengzhimianmao, hunyinzhuangkuang, jiankangzhuangkuang
+  </sql>
+  
+  <insert id="addresume" parameterType="com.jk.model.Resume" keyProperty="resumeid" useGeneratedKeys="true"  >
+    insert into t_resume_a (resumeid, resumename, userid, 
+      username, userphone, sex, 
+      birthday, photo, jiguan, 
+      minzu, zhengzhimianmao, hunyinzhuangkuang, 
+      jiankangzhuangkuang)
+    values (#{resumeid,jdbcType=INTEGER}, #{resumename,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{jiguan,jdbcType=VARCHAR}, 
+      #{minzu,jdbcType=VARCHAR}, #{zhengzhimianmao,jdbcType=VARCHAR}, #{hunyinzhuangkuang,jdbcType=VARCHAR}, 
+      #{jiankangzhuangkuang,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectresume" resultType="com.jk.model.Resume" >
+    select *
+    from t_resume_a a,t_resume_b b,t_resume_c c,t_resume_d d
+    where 
+    a.resumeid=b.resumeid  and a.resumeid=c.resumeid  and a.resumeid=d.resumeid
+    and a.userid = #{userid}
+  </select>
+   <select id="selectresumeall" resultType="java.util.Map" >
+    select *
+    from t_resume_a a,t_resume_b b,t_resume_c c,t_resume_d d
+    where 
+    a.resumeid=b.resumeid  and a.resumeid=c.resumeid  and a.resumeid=d.resumeid
+    and a.resumeid = #{resumeid}
+  </select>
+  <update id="updateresume" parameterType="com.jk.model.Resume" >
+    update t_resume_a
+    set resumename = #{resumename,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      userphone = #{userphone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      jiguan = #{jiguan,jdbcType=VARCHAR},
+      minzu = #{minzu,jdbcType=VARCHAR},
+      zhengzhimianmao = #{zhengzhimianmao,jdbcType=INTEGER},
+      hunyinzhuangkuang = #{hunyinzhuangkuang,jdbcType=INTEGER},
+      jiankangzhuangkuang = #{jiankangzhuangkuang,jdbcType=INTEGER}
+    where resumeid = #{resumeid,jdbcType=INTEGER}
+  </update>
+ 
+ 	<select id="selectRedu" resultType="java.util.Map">
+		select * from t_jobs where jstatus = 1 order by jhot desc 	
+	</select>
+	
+	<!--   查邮箱 -->
+    <select id="selectMailName"  resultType="com.jk.model.Resumeb" parameterType="java.lang.Integer" >
+    select t3.resumeid , t3.youxiang, t1.zhuangtai from t_resume_company t1 ,t_resume_a t2, t_resume_b t3 
+    where t1.resumeid = t2.resumeid and t2.resumeid=t3.resumeid
+    and t1.id=#{id}
+  </select>
+  	
+	
+</mapper>

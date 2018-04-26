@@ -11,5 +11,8 @@ package com.jk.controller;
  */
 public class Shiyanticontroller {
 
+  public void addmethod(){
+    
+  }
 
 }

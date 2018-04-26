@@ -10,5 +10,9 @@ package com.jk.controller;
  * @since 1.0.0
  */
 public class Shiyanticontroller1 {
+  
+  public void deletemethod(){
+  
+  }
 
 }
